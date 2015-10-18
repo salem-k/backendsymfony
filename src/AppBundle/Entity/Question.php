@@ -52,8 +52,23 @@ class Question
      */
     private $quizz;
 
+     /**
+     * @ORM\OneToMany(targetEntity="Response",mappedBy="question", fetch="EAGER")
+     */
+    private $responses;
 
-
+    public function __construct() {
+        $this->responses = new ArrayCollection();
+    }
+    /**
+     * Get $responses
+     *
+     * @return string
+     */
+    public function getResponses()
+    {
+        return $this->responses;
+    }
     /**
      * Set content
      *
@@ -159,4 +174,7 @@ class Question
     {
         return $this->quizz;
     }
+    public function __toString(){
+      return $this->content;
+    }    
 }

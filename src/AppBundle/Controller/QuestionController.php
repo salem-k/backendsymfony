@@ -53,7 +53,8 @@ class QuestionController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('question_show', array('id' => $entity->getId())));
+            //return $this->redirect($this->generateUrl('question_show', array('id' => $entity->getId())));
+            return $this->redirectToRoute('homepage');
         }
 
         return array(
@@ -84,18 +85,21 @@ class QuestionController extends Controller
     /**
      * Displays a form to create a new Question entity.
      *
-     * @Route("/new", name="question_new")
+     * @Route("/new/{id}", name="question_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
+        if(!$id)
+            $id = 0;
         $entity = new Question();
         $form   = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'quizzId'    => $id
         );
     }
 

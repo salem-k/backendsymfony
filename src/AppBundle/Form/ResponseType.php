@@ -16,8 +16,15 @@ class ResponseType extends AbstractType
     {
         $builder
             ->add('content')
-            ->add('custom')
-            ->add('questions')
+            //->add('custom')
+//            ->add('custom', 'checkbox', array(
+//               'label'    => 'Show this entry publicly?',
+//               'required' => false,
+//            ))
+            ->add('question','entity', array(
+                'empty_value' => 'Select a question',
+                'class' => 'AppBundle:Question'
+            ));
         ;
     }
     

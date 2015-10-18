@@ -14,12 +14,23 @@ class QuestionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('content')
-            ->add('type')
+            ->add('type','choice', array(
+                    'choices' => array(
+                        'Option'   => 'Radio',
+                        'Checkbox' => 'Checkbox'
+                    ),
+                    'required' => true
+                ))
             ->add('minCheck')
-            ->add('quizz')
-        ;
+            //->add('quizz')
+            ->add('quizz','entity', array(
+                'empty_value' => 'Select a Quizz',
+                'class' => 'AppBundle:Quizz'
+            ));
+                    //,$option['quizzId'];
     }
     
     /**

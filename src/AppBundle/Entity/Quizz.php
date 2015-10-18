@@ -59,6 +59,15 @@ class Quizz
     public function __construct() {
         $this->questions = new ArrayCollection();
     }
+    /**
+     * Get $questions
+     *
+     * @return string
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
 
     /**
      * Set name

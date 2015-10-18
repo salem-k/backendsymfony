@@ -112,6 +112,14 @@ class QuizzController extends Controller
 
         $entity = $em->getRepository('AppBundle:Quizz')->find($id);
 
+        $Questions = $em->getRepository('AppBundle:Question')->findByQuizz($id);
+        $Responses = [];
+        //sss
+        foreach($Questions as $question){
+          $Responses[] = $em->getRepository('AppBundle:Response')->findByQuestion($question->getId());
+        }
+
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Quizz entity.');
         }
@@ -120,8 +128,11 @@ class QuizzController extends Controller
 
         return array(
             'entity'      => $entity,
+            'responses' =>  $Responses,
+            'questions' =>  $Questions,
             'delete_form' => $deleteForm->createView(),
         );
+        
     }
 
     /**

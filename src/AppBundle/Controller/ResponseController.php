@@ -53,7 +53,8 @@ class ResponseController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('response_show', array('id' => $entity->getId())));
+            //return $this->redirect($this->generateUrl('response_show', array('id' => $entity->getId())));
+            return $this->redirectToRoute('homepage');
         }
 
         return array(
@@ -84,18 +85,21 @@ class ResponseController extends Controller
     /**
      * Displays a form to create a new Response entity.
      *
-     * @Route("/new", name="response_new")
+     * @Route("/new/{id}", name="response_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
+        if(!$id)
+            $id = 0;
         $entity = new Response();
         $form   = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'questionId'    => $id
         );
     }
 

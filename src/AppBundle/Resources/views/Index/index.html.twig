@@ -3,8 +3,68 @@
 {% block title %}AppBundle:Index:index{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Index:index page</h1>
 {{ dump(Quizzs) }}
-{{ dump(Responses) }}
-{{ dump(Questions) }}
+
+
+
+<div class="container">
+          <div class="row">
+            <div class="col-md-12 my-treeview">
+              <ul>
+{% for Quizz in Quizzs %}
+                <li role="button" >
+                      <p class="my-treeview-collapse" data-toggle="collapse" data-target="#Quizz{{Quizz.id}}">
+                          <i class="glyphicon glyphicon glyphicon-arrow-down"></i>
+                            {{Quizz.name}}
+                          <footer>
+                            <a type="button"  href="{{ path('question_new', { 'id': Quizz.id }) }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
+                            <a type="button"  href="{{ path('quizz_edit', { 'id': Quizz.id }) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a type="button" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                          </footer>
+                      </p>
+                      {#<p>{{Quizz.description}}</p>#}
+                    
+                    <!-- Nested media object -->
+                    <ul  class="collapse" id="Quizz{{Quizz.id}}">
+{% for Question in Quizz.getQuestions() %}
+                    <li>
+                        <p data-toggle="collapse" data-target="#Question{{Question.id}}">
+                            <i class="glyphicon glyphicon glyphicon-arrow-down"></i>
+                            {{Question.content}}
+                            <a type="button"  href="{{ path('response_new', { 'id': Question.id }) }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
+                            <a type="button"  href="{{ path('question_edit', { 'id': Question.id }) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a type="button" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                        </p>
+                        <ul id="Question{{Question.id}}">
+{% for Response in Question.getResponses() %}
+                        <li>
+                          <div class="form-group">
+                            {% if Question.type == 'Option' %}
+                                <div class="radio">
+                                    <input type="radio" id="flat-radio-2" disabled checked>
+                                    <label for="flat-radio-2">{{Response.content}}</label>
+                            {% else %}
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" disabled checked value="">
+                                        {{Response.content}}
+                                    </label>
+                            {% endif %}
+                                    {#Mincheck : {{ Question.minCheck }}#}
+                                    <a type="button" class="btn btn-warning btn-xs" href="{{ path('response_edit', { 'id': Response.id }) }}"><i class="glyphicon glyphicon-edit"></i></a>
+                                    <a type="button" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                                </div>
+                        </div>
+{% endfor %}                
+                      </ul>
+                    </li>
+{% endfor %}
+                </ul>
+              </li>
+{% endfor %}
+              </ul>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

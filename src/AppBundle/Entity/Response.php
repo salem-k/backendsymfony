@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Response
  *
- * @ORM\Table(name="response", indexes={@ORM\Index(name="fk_response_question1_idx", columns={"question_id"})})
+ * @ORM\Table(name="response", indexes={@ORM\Index(name="fk_Response_Question_idx", columns={"question_id"})})
  * @ORM\Entity
  */
 class Response
@@ -40,11 +40,12 @@ class Response
     /**
      * @var \Question
      *
-     * @ORM\ManyToOne(targetEntity="Question",fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Question",fetch="EAGER",inversedBy="responses")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      * })
      */
+
     private $question;
 
 
@@ -129,5 +130,8 @@ class Response
     public function getQuestion()
     {
         return $this->question;
+    }
+    public function __toString(){
+      return $this->content;
     }
 }

@@ -17,11 +17,19 @@ class QuizzType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('dateBegin')
-            ->add('dateEnd')
+            ->add('dateBegin','date',array(
+              'widget' => 'single_text',
+              'format' => 'dd-MM-yyyy',
+              'attr' => array('class' => 'date')
+              ))
+            ->add('dateEnd','date',array(
+              'widget' => 'single_text',
+              'format' => 'dd-MM-yyyy',
+              'attr' => array('class' => 'date')
+              ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
