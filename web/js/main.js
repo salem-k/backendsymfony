@@ -8,8 +8,6 @@
 $(document).ready(function(){
     
     $(document).ready(function(){
-        if( $( "#appbundle_question_quizz" ).length )
-            $('#appbundle_question_quizz option[value='+quizzId+']').attr("selected", "selected");
         if( $( "#appbundle_response_question" ).length )
             $('#appbundle_response_question option[value='+questionId+']').attr("selected", "selected");
         

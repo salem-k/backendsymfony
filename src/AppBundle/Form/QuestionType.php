@@ -8,13 +8,19 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class QuestionType extends AbstractType
 {
+    private $quizz;
+    
+    public function __construct($quizz)
+    {
+        $this->quizz = $quizz;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
             ->add('content')
             ->add('type','choice', array(
@@ -28,7 +34,8 @@ class QuestionType extends AbstractType
             //->add('quizz')
             ->add('quizz','entity', array(
                 'empty_value' => 'Select a Quizz',
-                'class' => 'AppBundle:Quizz'
+                'class' => 'AppBundle:Quizz',
+                'data' => $this->quizz
             ));
                     //,$option['quizzId'];
     }
