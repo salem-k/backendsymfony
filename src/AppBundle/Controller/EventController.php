@@ -260,8 +260,9 @@ class EventController extends Controller
 
         $entities = $em->getRepository('AppBundle:Event')->findAll();
 
+        $serializer = $this->container->get('jms_serializer');
 
-        $response = new Response(json_encode(array('events' => $entities)));
+        $response = new Response(json_encode($serializer->serialize($entities, 'json') ) ) ;
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
