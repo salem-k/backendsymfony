@@ -11,13 +11,14 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>{% block title %}Welcome!{% endblock %}</title>
-    
+
 
 {% block stylesheets %}
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="/bootflat/css/bootflat.css">
     <link href="css/backendquizz.css" rel="stylesheet" type="text/css"/>
     <style>
@@ -45,11 +46,18 @@
       {% block body %}{% endblock %}
     </div>
 
-{% block javascripts %}
-{% endblock %}
+
     <script src="/js/jquery-2.1.4.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
     <script src="/js/main.js"></script>
-
+{% block javascripts %}
+    $(document).ready(function(){
+    alert(1);
+      $('.datetimeselect').datetimepicker({
+            format: "dd MM yyyy - hh:ii:ss"
+      });
+    });
+{% endblock %}
   </body>
 </html>
