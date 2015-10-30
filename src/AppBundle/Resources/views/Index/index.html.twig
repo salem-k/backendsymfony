@@ -3,6 +3,9 @@
 {% block title %}AppBundle:Index:index{% endblock %}
 
 {% block body %}
+
+{% render controller("FOSUserBundle:Security:login") %}
+
 {{ dump(Quizzs) }}
 
 
@@ -23,7 +26,7 @@
                           </footer>
                       </p>
                       {#<p>{{Quizz.description}}</p>#}
-                    
+
                     <!-- Nested media object -->
                     <ul  class="collapse" id="Quizz{{Quizz.id}}">
 {% for Question in Quizz.getQuestions() %}
@@ -55,7 +58,7 @@
                                     <a type="button" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
                                 </div>
                         </div>
-{% endfor %}                
+{% endfor %}
                       </ul>
                     </li>
 {% endfor %}

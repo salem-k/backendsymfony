@@ -43,7 +43,13 @@
 
 
     <div class="container">
-      {% block body %}{% endblock %}
+      {% block body %}
+      ss
+{% block fos_user_content %}
+  
+{% endblock %}
+sde
+      {% endblock %}
     </div>
 
 
@@ -55,13 +61,12 @@
     {% block javascripts %}
     <script>
         $(document).ready(function(){
-        alert(1);
           $('.datetimeselect').datetimepicker({
                 format: "dd MM yyyy - hh:ii:ss"
           });
         });
     </script>
     {% endblock %}
-    
+
   </body>
 </html>

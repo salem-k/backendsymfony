@@ -25,18 +25,21 @@ class IndexController extends Controller
     public function indexAction()
     {
       $em = $this->getDoctrine()->getManager();
-
       $Quizzs = $em->getRepository('AppBundle:Quizz')->findAll();
-
-//      $Questions = $em->getRepository('AppBundle:Question')->findByQuizz(1);
-
-//      $Responses = $em->getRepository('AppBundle:Response')->findByQuestion(1);
-        
-
-        
         return array(
                 'Quizzs' => $Quizzs
         );
     }
-
+    /**
+     * @Route("/", name="login")
+     * @Template()
+     */
+    public function loginAction()
+    {
+      echo 'TESTTT';
+      die;
+        return array(
+                'Quizzs' => $Quizzs
+        );
+    }
 }
