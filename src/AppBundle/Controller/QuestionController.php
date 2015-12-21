@@ -70,9 +70,9 @@ class QuestionController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Question $entity)
+    private function createCreateForm(Question $entity, \AppBundle\Entity\Quizz $quiz)
     {
-        $form = $this->createForm(new QuestionType(), $entity, array(
+        $form = $this->createForm(new QuestionType($quiz), $entity, array(
             'action' => $this->generateUrl('question_create'),
             'method' => 'POST',
         ));
@@ -94,7 +94,10 @@ class QuestionController extends Controller
         if(!$id)
             $id = 0;
         $entity = new Question();
-        $form   = $this->createCreateForm($entity);
+        $em = $this->getDoctrine()->getManager();
+
+        $quiz = $em->getRepository('AppBundle:Quizz')->find($id);
+        $form   = $this->createCreateForm($entity, $quiz);
 
         return array(
             'entity' => $entity,
